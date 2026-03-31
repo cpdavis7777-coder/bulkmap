@@ -36,8 +36,8 @@ function statusLabel(s: NutrientCoverageRow["status"], isCap?: boolean) {
 
 function barTone(status: NutrientCoverageRow["status"]) {
   if (status === "under") return "bg-amber-500";
-  if (status === "ok") return "bg-emerald-600";
-  if (status === "above") return "bg-sky-600";
+  if (status === "ok") return "bg-lime-500";
+  if (status === "above") return "bg-cyan-500";
   return "bg-rose-500";
 }
 
@@ -67,15 +67,15 @@ function NutrientBar({
   return (
     <div className={compact ? "" : "space-y-1.5"}>
       <div className="flex items-start justify-between gap-2 text-xs sm:text-sm">
-        <span className="font-medium text-zinc-800">{row.label}</span>
+        <span className="font-medium text-zinc-200">{row.label}</span>
         <span className="shrink-0 text-right text-zinc-500">
-          <span className="tabular-nums text-zinc-900">{fmtNum(actual)}</span>
+          <span className="tabular-nums text-zinc-100">{fmtNum(actual)}</span>
           <span className="text-zinc-400"> / </span>
           <span className="tabular-nums">{fmtNum(target)}</span>
           <span className="ml-1 text-zinc-400">{row.unit}</span>
         </span>
       </div>
-      <div className="h-2 overflow-hidden rounded-full bg-zinc-200">
+      <div className="h-2 overflow-hidden rounded-full bg-zinc-800 ring-1 ring-white/5">
         <div
           className={`h-full rounded-full transition-[width] ${barTone(row.status)}`}
           style={{ width: `${width}%` }}
@@ -86,12 +86,12 @@ function NutrientBar({
         <span
           className={
             row.status === "ok"
-              ? "text-emerald-700"
+              ? "text-lime-400"
               : row.status === "under"
-                ? "text-amber-700"
+                ? "text-amber-400"
                 : row.status === "above"
-                  ? "text-sky-800"
-                  : "text-rose-700"
+                  ? "text-cyan-400"
+                  : "text-rose-400"
           }
         >
           {statusLabel(row.status, row.is_cap)}
@@ -116,23 +116,23 @@ export function NutrientCoveragePanel({
   const { macro, health, vitamins, minerals } = partitionRows(safeRows);
 
   return (
-    <section className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
+    <section className="rounded-2xl border border-white/10 bg-zinc-900/40 p-6 backdrop-blur-sm">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <h2 className="text-xl font-semibold text-zinc-950">Nutrient coverage</h2>
-          <p className="mt-1 text-sm text-zinc-600">
+          <h2 className="font-display text-xl font-bold text-white">Nutrient coverage</h2>
+          <p className="mt-1 text-sm text-zinc-400">
             Aggregate plan vs FDA Daily Value–style references (adult-oriented MVP). Macros use your plan targets;
             micronutrients use standard reference daily amounts scaled to your calorie level where noted.
           </p>
         </div>
-        <div className="inline-flex rounded-xl border border-zinc-200 bg-zinc-50 p-1 text-sm">
+        <div className="inline-flex rounded-xl border border-white/10 bg-zinc-950/80 p-1 text-sm">
           <button
             type="button"
             onClick={() => onViewModeChange("daily")}
-            className={`rounded-lg px-4 py-2 font-medium transition ${
+            className={`rounded-lg px-4 py-2 font-semibold transition ${
               viewMode === "daily"
-                ? "bg-white text-zinc-900 shadow-sm"
-                : "text-zinc-600 hover:text-zinc-900"
+                ? "bg-lime-400/15 text-lime-200 shadow-inner"
+                : "text-zinc-500 hover:text-zinc-300"
             }`}
           >
             Average / day
@@ -140,10 +140,10 @@ export function NutrientCoveragePanel({
           <button
             type="button"
             onClick={() => onViewModeChange("period")}
-            className={`rounded-lg px-4 py-2 font-medium transition ${
+            className={`rounded-lg px-4 py-2 font-semibold transition ${
               viewMode === "period"
-                ? "bg-white text-zinc-900 shadow-sm"
-                : "text-zinc-600 hover:text-zinc-900"
+                ? "bg-lime-400/15 text-lime-200 shadow-inner"
+                : "text-zinc-500 hover:text-zinc-300"
             }`}
           >
             Full {days}-day plan
@@ -153,7 +153,7 @@ export function NutrientCoveragePanel({
 
       <div className="mt-8 space-y-10">
         <div>
-          <h3 className="text-sm font-semibold uppercase tracking-wide text-zinc-500">Macronutrients</h3>
+          <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-lime-400/75">Macronutrients</h3>
           <div className="mt-4 grid gap-5 sm:grid-cols-2">
             {macro.map((row) => (
               <NutrientBar key={row.key} row={row} mode={viewMode} days={days} />
@@ -163,7 +163,7 @@ export function NutrientCoveragePanel({
 
         {health.length > 0 && (
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wide text-zinc-500">
+            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-lime-400/75">
               Fiber &amp; limits
             </h3>
             <div className="mt-4 grid gap-5 sm:grid-cols-2">
@@ -175,10 +175,10 @@ export function NutrientCoveragePanel({
         )}
 
         <div>
-          <h3 className="text-sm font-semibold uppercase tracking-wide text-zinc-500">Vitamins</h3>
+          <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-lime-400/75">Vitamins</h3>
           <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {vitamins.map((row) => (
-              <div key={row.key} className="rounded-xl border border-zinc-100 bg-zinc-50/80 p-4">
+              <div key={row.key} className="rounded-xl border border-white/8 bg-zinc-950/50 p-4">
                 <NutrientBar row={row} mode={viewMode} days={days} compact />
               </div>
             ))}
@@ -186,10 +186,10 @@ export function NutrientCoveragePanel({
         </div>
 
         <div>
-          <h3 className="text-sm font-semibold uppercase tracking-wide text-zinc-500">Minerals</h3>
+          <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-lime-400/75">Minerals</h3>
           <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {minerals.map((row) => (
-              <div key={row.key} className="rounded-xl border border-zinc-100 bg-zinc-50/80 p-4">
+              <div key={row.key} className="rounded-xl border border-white/8 bg-zinc-950/50 p-4">
                 <NutrientBar row={row} mode={viewMode} days={days} compact />
               </div>
             ))}
@@ -215,25 +215,25 @@ export function NutrientCoveragePanel({
             {safeRows.map((row) => {
               const actual = viewMode === "daily" ? row.actual_daily_avg : row.actual_period;
               return (
-                <tr key={row.key} className="border-b border-zinc-100">
-                  <td className="py-2 pr-4 font-medium text-zinc-900">{row.label}</td>
-                  <td className="py-2 pr-4 tabular-nums text-zinc-600">
+                <tr key={row.key} className="border-b border-white/5">
+                  <td className="py-2 pr-4 font-medium text-zinc-200">{row.label}</td>
+                  <td className="py-2 pr-4 tabular-nums text-zinc-500">
                     {fmtNum(row.target_daily, 2)} {row.unit}
                   </td>
-                  <td className="py-2 pr-4 tabular-nums text-zinc-800">
+                  <td className="py-2 pr-4 tabular-nums text-zinc-300">
                     {fmtNum(actual, 2)} {row.unit}
                   </td>
-                  <td className="py-2 pr-4 tabular-nums text-zinc-800">{fmtNum(row.pct_of_daily_target, 1)}%</td>
+                  <td className="py-2 pr-4 tabular-nums text-zinc-300">{fmtNum(row.pct_of_daily_target, 1)}%</td>
                   <td className="py-2">
                     <span
-                      className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${
+                      className={`inline-flex rounded-full px-2 py-0.5 text-xs font-semibold ${
                         row.status === "ok"
-                          ? "bg-emerald-100 text-emerald-800"
+                          ? "bg-lime-400/15 text-lime-300"
                           : row.status === "under"
-                            ? "bg-amber-100 text-amber-900"
+                            ? "bg-amber-500/15 text-amber-300"
                             : row.status === "above"
-                              ? "bg-sky-100 text-sky-900"
-                              : "bg-rose-100 text-rose-800"
+                              ? "bg-cyan-500/15 text-cyan-300"
+                              : "bg-rose-500/15 text-rose-300"
                       }`}
                     >
                       {statusLabel(row.status, row.is_cap)}

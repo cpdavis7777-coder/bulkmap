@@ -1,33 +1,44 @@
+import { BarChart3, PiggyBank, ShieldCheck } from "lucide-react";
+
 const features = [
   {
-    title: "Solver-first nutrition planning",
+    icon: BarChart3,
+    title: "Solver-first planning",
     description:
-      "BulkMap builds an optimized grocery list from your targets and constraints, not from rigid recipes.",
+      "An optimized grocery list from your targets and constraints — not rigid meal plans you will not follow.",
   },
   {
-    title: "Budget-aware macro precision",
+    icon: PiggyBank,
+    title: "Budget-aware macros",
     description:
-      "Hit protein, carbs, and fat goals while minimizing cost and keeping your weekly spend predictable.",
+      "Hit protein, carbs, and fat while keeping weekly spend predictable and capped.",
   },
   {
-    title: "Micronutrient confidence",
+    icon: ShieldCheck,
+    title: "Micro coverage",
     description:
-      "Track vitamin and mineral coverage so your plan supports performance, recovery, and overall health.",
+      "Track vitamins and minerals against reference daily values so the plan supports recovery and health.",
   },
 ];
 
 export function FeatureCards() {
   return (
-    <section className="grid gap-4 md:grid-cols-3">
-      {features.map((feature) => (
-        <article
-          key={feature.title}
-          className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur"
-        >
-          <h3 className="text-lg font-semibold text-white">{feature.title}</h3>
-          <p className="mt-2 text-sm leading-6 text-zinc-300">{feature.description}</p>
-        </article>
-      ))}
+    <section className="grid gap-5 md:grid-cols-3">
+      {features.map((feature) => {
+        const Icon = feature.icon;
+        return (
+          <article
+            key={feature.title}
+            className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.07] to-white/[0.02] p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.04)] transition duration-300 hover:border-lime-400/25 hover:shadow-[0_20px_50px_-24px_rgba(163,230,53,0.35)]"
+          >
+            <div className="mb-4 inline-flex rounded-xl border border-white/10 bg-white/5 p-2.5 text-lime-400 transition group-hover:border-lime-400/30 group-hover:text-lime-300">
+              <Icon className="size-5" strokeWidth={2} aria-hidden />
+            </div>
+            <h3 className="font-display text-lg font-bold tracking-tight text-white">{feature.title}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-zinc-400">{feature.description}</p>
+          </article>
+        );
+      })}
     </section>
   );
 }

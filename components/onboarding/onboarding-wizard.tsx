@@ -142,7 +142,7 @@ export function OnboardingWizard() {
   };
 
   return (
-    <div className="mx-auto w-full max-w-3xl rounded-3xl border border-zinc-800 bg-zinc-950 p-7 text-zinc-100 shadow-2xl">
+    <div className="mx-auto w-full max-w-3xl rounded-3xl border border-white/10 bg-zinc-950/90 p-7 text-zinc-100 shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_28px_100px_-40px_rgba(0,0,0,0.85)] backdrop-blur-xl">
       <div className="mb-6">
         <div className="flex items-center justify-between text-xs text-zinc-400">
           <span>
@@ -152,13 +152,13 @@ export function OnboardingWizard() {
         </div>
         <div className="mt-2 h-2 rounded-full bg-zinc-800">
           <div
-            className="h-full rounded-full bg-emerald-400 transition-all"
+            className="h-full rounded-full bg-lime-400 transition-all"
             style={{ width: `${progress}%` }}
           />
         </div>
       </div>
 
-      <h2 className="text-2xl font-semibold tracking-tight">{stepTitles[step]}</h2>
+      <h2 className="font-display text-2xl font-bold tracking-tight text-white">{stepTitles[step]}</h2>
       <p className="mt-1 text-sm text-zinc-400">
         Build your baseline plan now. You can refine every setting later.
       </p>
@@ -173,7 +173,7 @@ export function OnboardingWizard() {
                 onClick={() => setForm((value) => ({ ...value, goal }))}
                 className={`cursor-pointer rounded-xl border px-4 py-5 text-left capitalize transition ${
                   form.goal === goal
-                    ? "border-emerald-400 bg-emerald-400/15 text-zinc-100"
+                    ? "border-lime-400 bg-lime-400/15 text-zinc-100"
                     : "border-zinc-800 bg-zinc-900 text-zinc-200 hover:border-zinc-600 hover:bg-zinc-800"
                 }`}
               >
@@ -193,7 +193,7 @@ export function OnboardingWizard() {
                   onClick={() => setForm({ ...form, unitSystem: "metric" })}
                   className={`rounded-xl border px-4 py-3 text-left text-sm transition ${
                     form.unitSystem === "metric"
-                      ? "border-emerald-400 bg-emerald-400/15 text-zinc-100"
+                      ? "border-lime-400 bg-lime-400/15 text-zinc-100"
                       : "border-zinc-800 bg-zinc-900 text-zinc-300 hover:border-zinc-600"
                   }`}
                 >
@@ -205,7 +205,7 @@ export function OnboardingWizard() {
                   onClick={() => setForm({ ...form, unitSystem: "imperial" })}
                   className={`rounded-xl border px-4 py-3 text-left text-sm transition ${
                     form.unitSystem === "imperial"
-                      ? "border-emerald-400 bg-emerald-400/15 text-zinc-100"
+                      ? "border-lime-400 bg-lime-400/15 text-zinc-100"
                       : "border-zinc-800 bg-zinc-900 text-zinc-300 hover:border-zinc-600"
                   }`}
                 >
@@ -275,7 +275,7 @@ export function OnboardingWizard() {
                   onClick={() => setForm({ ...form, targetMode: "auto" })}
                   className={`rounded-xl border px-4 py-3 text-left text-sm transition ${
                     form.targetMode === "auto"
-                      ? "border-emerald-400 bg-emerald-400/15 text-zinc-100"
+                      ? "border-lime-400 bg-lime-400/15 text-zinc-100"
                       : "border-zinc-800 bg-zinc-900 text-zinc-300 hover:border-zinc-600"
                   }`}
                 >
@@ -287,7 +287,7 @@ export function OnboardingWizard() {
                   onClick={() => setForm({ ...form, targetMode: "manual" })}
                   className={`rounded-xl border px-4 py-3 text-left text-sm transition ${
                     form.targetMode === "manual"
-                      ? "border-emerald-400 bg-emerald-400/15 text-zinc-100"
+                      ? "border-lime-400 bg-lime-400/15 text-zinc-100"
                       : "border-zinc-800 bg-zinc-900 text-zinc-300 hover:border-zinc-600"
                   }`}
                 >
@@ -311,7 +311,7 @@ export function OnboardingWizard() {
                     onClick={() => setForm({ ...form, manualMacroStyle: "percent" })}
                     className={`rounded-xl border px-3 py-2 text-left text-sm ${
                       form.manualMacroStyle === "percent"
-                        ? "border-emerald-400 bg-emerald-400/15"
+                        ? "border-lime-400 bg-lime-400/15"
                         : "border-zinc-800 bg-zinc-900"
                     }`}
                   >
@@ -322,7 +322,7 @@ export function OnboardingWizard() {
                     onClick={() => setForm({ ...form, manualMacroStyle: "grams" })}
                     className={`rounded-xl border px-3 py-2 text-left text-sm ${
                       form.manualMacroStyle === "grams"
-                        ? "border-emerald-400 bg-emerald-400/15"
+                        ? "border-lime-400 bg-lime-400/15"
                         : "border-zinc-800 bg-zinc-900"
                     }`}
                   >
@@ -399,7 +399,7 @@ export function OnboardingWizard() {
                   onClick={() => setForm((value) => ({ ...value, dietStyle: style }))}
                   className={`cursor-pointer rounded-xl border px-4 py-4 text-left capitalize transition ${
                     form.dietStyle === style
-                      ? "border-emerald-400 bg-emerald-400/15 text-zinc-100"
+                      ? "border-lime-400 bg-lime-400/15 text-zinc-100"
                       : "border-zinc-800 bg-zinc-900 text-zinc-200 hover:border-zinc-600 hover:bg-zinc-800"
                   }`}
                 >
@@ -471,7 +471,7 @@ export function OnboardingWizard() {
             <textarea
               value={form.exclusions}
               onChange={(event) => setForm({ ...form, exclusions: event.target.value })}
-              className="min-h-28 rounded-xl border border-zinc-800 bg-zinc-900 px-3 py-2 text-zinc-100 outline-none ring-emerald-400/30 focus:ring-2"
+              className="min-h-28 rounded-xl border border-zinc-800 bg-zinc-900 px-3 py-2 text-zinc-100 outline-none ring-lime-400/30 focus:ring-2"
               placeholder="e.g. shellfish, lactose, peanuts"
             />
           </label>
@@ -633,7 +633,7 @@ function ToggleRow({
         type="checkbox"
         checked={checked}
         onChange={(event) => onChange(event.target.checked)}
-        className="size-4 accent-emerald-400"
+        className="size-4 accent-lime-400"
       />
     </label>
   );
@@ -654,7 +654,7 @@ function LabeledInput({
       <input
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="rounded-xl border border-zinc-800 bg-zinc-900 px-3 py-2 text-zinc-100 outline-none ring-emerald-400/30 focus:ring-2"
+        className="rounded-xl border border-zinc-800 bg-zinc-900 px-3 py-2 text-zinc-100 outline-none ring-lime-400/30 focus:ring-2"
       />
     </label>
   );
@@ -677,7 +677,7 @@ function LabeledSelect({
       <select
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="rounded-xl border border-zinc-800 bg-zinc-900 px-3 py-2 text-zinc-100 outline-none ring-emerald-400/30 focus:ring-2"
+        className="rounded-xl border border-zinc-800 bg-zinc-900 px-3 py-2 text-zinc-100 outline-none ring-lime-400/30 focus:ring-2"
       >
         {options.map((option) => (
           <option key={option} value={option}>
